@@ -1,0 +1,26 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Блог</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<br><br>
+
+<main role="main" class="container">
+    <div th:each="el : ${posts}" class="jumbotron">
+        <h3 th:text="${el.title}"></h3>
+        <p th:text="${el.anons}" class="lead"></p>
+        <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id}" role="button">Детальнее</a>
+    </div>
+</main>
+
+
+
+</body></html>

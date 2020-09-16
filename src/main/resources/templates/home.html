@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <p class="lead" th:text="'Привет, ' + ${title} + '!'" />
+        <p class="lead" th:text="'Тебя зовут, ' + ${name} + '!'" />
+    </div>
+
+</main>
+
+
+
+
+</body>
+</html>
