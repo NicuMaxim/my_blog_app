@@ -44,8 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-
                 .authorizeRequests().antMatchers("/registration**").permitAll()
+                .antMatchers("/blog/{id}/remove", "/blog/{id}/edit").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -60,6 +60,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login?logout")
                     .permitAll();
     }
+
+
+//    @Bean
+//    public SpringTemplateEngine templateEngine() {
+//        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+//        templateEngine.setTemplateResolver(templateResolver());
+//        templateEngine.addDialect(new SpringSecurityDialect());
+//        return templateEngine;
+//    }
+//
+//
+//    private IDialect securityDialect(){
+//        SpringSecurityDialect dialect = new SpringSecurityDialect();
+//        return dialect;
+//    }
 
 //    @Bean
 //    @Override

@@ -1,14 +1,11 @@
 package com.my_blog_app.controllers;
 
-import com.my_blog_app.models.Post;
+import com.my_blog_app.models.Posts;
 import com.my_blog_app.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -28,7 +25,7 @@ public class BlogController {
 
     @GetMapping("/blog")
     public String blogMain(Model model) {
-        Iterable<Post> posts = postRepository.findAll();
+        Iterable<Posts> posts = postRepository.findAll();
         model.addAttribute("posts", posts);
 
         return "blog-main";
@@ -47,7 +44,7 @@ public class BlogController {
                               @RequestParam String full_text,
                               Model model) {
 
-        Post post = new Post(title, anons, full_text);
+        Posts post = new Posts(title, anons, full_text);
 
         postRepository.save(post);
 
@@ -63,9 +60,9 @@ public class BlogController {
             return "redirect:/blog";
         }
 
-        Optional<Post> post = postRepository.findById(id);
+        Optional<Posts> post = postRepository.findById(id);
 
-        ArrayList<Post> res = new ArrayList<>();
+        ArrayList<Posts> res = new ArrayList<>();
 
         post.ifPresent(res::add);
 
@@ -83,9 +80,9 @@ public class BlogController {
             return "redirect:/blog";
         }
 
-        Optional<Post> post = postRepository.findById(id);
+        Optional<Posts> post = postRepository.findById(id);
 
-        ArrayList<Post> res = new ArrayList<>();
+        ArrayList<Posts> res = new ArrayList<>();
 
         post.ifPresent(res::add);
 
@@ -102,7 +99,7 @@ public class BlogController {
                                   @RequestParam String full_text,
                                   Model model) {
 
-        Post post = postRepository.findById(id).orElseThrow();
+        Posts post = postRepository.findById(id).orElseThrow();
         post.setTitle(title);
         post.setAnons(anons);
         post.setFull_text(full_text);
@@ -118,7 +115,7 @@ public class BlogController {
     public String blogPostDelete (@PathVariable (value = "id") long id,
                                   Model model) {
 
-        Post post = postRepository.findById(id).orElseThrow();
+        Posts post = postRepository.findById(id).orElseThrow();
 
         postRepository.delete(post);
 
