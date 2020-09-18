@@ -15,7 +15,7 @@ public class Posts {
     private String title;
     private String anons;
     private String full_text;
-
+    private String author;
 
     public Long getId() {
         return id;
@@ -49,15 +49,23 @@ public class Posts {
         this.full_text = full_text;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public Posts() {
     }
 
-    public Posts(String title, String anons, String full_text) {
+    public Posts(String title, String anons, String full_text, String author) {
 
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
+        this.author = author;
 
     }
 

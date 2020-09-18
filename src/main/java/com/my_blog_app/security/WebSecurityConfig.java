@@ -61,32 +61,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll();
     }
 
-
-//    @Bean
-//    public SpringTemplateEngine templateEngine() {
-//        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//        templateEngine.setTemplateResolver(templateResolver());
-//        templateEngine.addDialect(new SpringSecurityDialect());
-//        return templateEngine;
-//    }
-//
-//
-//    private IDialect securityDialect(){
-//        SpringSecurityDialect dialect = new SpringSecurityDialect();
-//        return dialect;
-//    }
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("u")
-//                        .password("p")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
-
 }

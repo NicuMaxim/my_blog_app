@@ -17,6 +17,7 @@
     <div th:each="el : ${post}" class="jumbotron">
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.full_text}" class="lead"></p>
+        The author of the blog is : <h7 th:text="${el.author}"></h7>
 
         <div sec:authorize="hasAuthority('ROLE_ADMIN')">
             <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id} + '/edit'" role="button">Редактировать</a> <br><br>

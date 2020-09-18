@@ -1,8 +1,12 @@
 package com.my_blog_app.controllers;
 
 import com.my_blog_app.models.Posts;
+import com.my_blog_app.models.User;
 import com.my_blog_app.repository.PostRepository;
+import com.my_blog_app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +31,6 @@ public class BlogController {
     @GetMapping("/blog")
     public String blogMain(Model model) {
         Iterable<Posts> postsIterator = postRepository.findAll();
-
         List<Posts> posts = new ArrayList<>();
         postsIterator.forEach(posts::add);
 
@@ -42,6 +45,8 @@ public class BlogController {
         return "blog-add";
     }
 
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String title,
@@ -49,8 +54,28 @@ public class BlogController {
                               @RequestParam String full_text,
                               Model model) {
 
-        Posts post = new Posts(title, anons, full_text);
+        Authentication current_user = SecurityContextHolder.getContext().getAuthentication();
+        String current_email = current_user.getName();
 
+        Iterable<User> postsIterator = userRepository.findAll();
+
+        List<User> users = new ArrayList<>();
+        postsIterator.forEach(users::add);
+
+        String firstName = null;
+        String lastName = null;
+
+        for (User user : users) {
+            if (user.getEmail().equals(current_email)) {
+
+                firstName = user.getFirstName();
+                lastName = user.getLastName();
+            }
+        }
+
+        String author = firstName + " " + lastName;
+
+        Posts post = new Posts(title, anons, full_text, author);
         postRepository.save(post);
 
         return "redirect:/blog";
@@ -66,9 +91,7 @@ public class BlogController {
         }
 
         Optional<Posts> post = postRepository.findById(id);
-
         ArrayList<Posts> res = new ArrayList<>();
-
         post.ifPresent(res::add);
 
         model.addAttribute("post", res);
@@ -86,9 +109,7 @@ public class BlogController {
         }
 
         Optional<Posts> post = postRepository.findById(id);
-
         ArrayList<Posts> res = new ArrayList<>();
-
         post.ifPresent(res::add);
 
         model.addAttribute("post", res);
@@ -121,7 +142,6 @@ public class BlogController {
                                   Model model) {
 
         Posts post = postRepository.findById(id).orElseThrow();
-
         postRepository.delete(post);
 
         return "redirect:/blog";
