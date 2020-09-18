@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -25,7 +26,11 @@ public class BlogController {
 
     @GetMapping("/blog")
     public String blogMain(Model model) {
-        Iterable<Posts> posts = postRepository.findAll();
+        Iterable<Posts> postsIterator = postRepository.findAll();
+
+        List<Posts> posts = new ArrayList<>();
+        postsIterator.forEach(posts::add);
+
         model.addAttribute("posts", posts);
 
         return "blog-main";

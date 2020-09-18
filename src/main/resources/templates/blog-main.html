@@ -14,7 +14,8 @@
 <br><br>
 
 <main role="main" class="container">
-    <div th:each="el : ${posts}" class="jumbotron">
+    <div th:each="i : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="jumbotron"
+        th:with="el=${posts[i]}">
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.anons}" class="lead"></p>
         <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id}" role="button">Детальнее</a>
