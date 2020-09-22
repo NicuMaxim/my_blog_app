@@ -1,13 +1,10 @@
 package com.my_blog_app.controllers;
 
-import com.my_blog_app.GetUserName;
+import com.my_blog_app.NameByEmail;
 import com.my_blog_app.models.Posts;
-import com.my_blog_app.models.User;
 import com.my_blog_app.repository.PostRepository;
-import com.my_blog_app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
+@ComponentScan
 @Controller
 public class BlogController {
 
@@ -47,6 +45,9 @@ public class BlogController {
     }
 
 
+    @Autowired
+    private NameByEmail nameByEmail;
+
 
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String title,
@@ -54,9 +55,7 @@ public class BlogController {
                               @RequestParam String full_text,
                               Model model) {
 
-        GetUserName getUserName = new GetUserName();
-
-        String author = getUserName.getUserName();
+        String author = nameByEmail.getUserName();
 
         Posts post = new Posts(title, anons, full_text, author);
         postRepository.save(post);
