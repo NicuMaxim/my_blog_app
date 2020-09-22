@@ -1,5 +1,6 @@
 package com.my_blog_app.controllers;
 
+import com.my_blog_app.GetUserName;
 import com.my_blog_app.models.Posts;
 import com.my_blog_app.models.User;
 import com.my_blog_app.repository.PostRepository;
@@ -45,8 +46,7 @@ public class BlogController {
         return "blog-add";
     }
 
-    @Autowired
-    private UserRepository userRepository;
+
 
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String title,
@@ -54,26 +54,9 @@ public class BlogController {
                               @RequestParam String full_text,
                               Model model) {
 
-        Authentication current_user = SecurityContextHolder.getContext().getAuthentication();
-        String current_email = current_user.getName();
+        GetUserName getUserName = new GetUserName();
 
-        Iterable<User> postsIterator = userRepository.findAll();
-
-        List<User> users = new ArrayList<>();
-        postsIterator.forEach(users::add);
-
-        String firstName = null;
-        String lastName = null;
-
-        for (User user : users) {
-            if (user.getEmail().equals(current_email)) {
-
-                firstName = user.getFirstName();
-                lastName = user.getLastName();
-            }
-        }
-
-        String author = firstName + " " + lastName;
+        String author = getUserName.getUserName();
 
         Posts post = new Posts(title, anons, full_text, author);
         postRepository.save(post);
