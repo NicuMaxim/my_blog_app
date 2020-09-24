@@ -1,27 +1,43 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Блог</title>
+    <title>Blog</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/blog-home.css" rel="stylesheet">
 </head>
 
 <body>
 
 <header th:insert="blocks/header :: header"></header>
 
-<br><br>
+<div class="container">
 
-<main role="main" class="container">
-    <div th:each="i : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="jumbotron"
-        th:with="el=${posts[i]}">
-        <h3 th:text="${el.title}"></h3>
-        <p th:text="${el.anons}" class="lead"></p>
-        <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id}" role="button">Детальнее</a>
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="my-4">My Blog App</h2>
+
+            <!-- Blog Post -->
+            <div th:each="i : ${#numbers.sequence(posts.size() - 1, 0, -1)}" class="card mb-4"
+                 th:with="el=${posts[i]}">
+<!--                <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">-->
+                <div class="card-body">
+                    <h2 class="card-title" th:text="${el.title}"></h2>
+                    <h5 class="card-title" th:text="${el.anons}"></h5>
+                    <p class="card-text" th:text="${el.full_text}"></p>
+                    <br>
+                    <a th:href="'/blog/' + ${el.id}" class="btn btn-primary">View full post &rarr;</a>
+                </div>
+                <div class="card-footer text-muted text-lg-right">
+                    <text class="lead" th:text="'Posted by ' + ${el.author}" ></text>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+</div>
 
-
+<footer th:insert="blocks/footer :: footer"></footer>
 
 </body></html>

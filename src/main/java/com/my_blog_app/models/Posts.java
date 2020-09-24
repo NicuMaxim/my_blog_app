@@ -1,9 +1,8 @@
 package com.my_blog_app.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 
 @Entity
 public class Posts {
@@ -13,9 +12,14 @@ public class Posts {
     private Long id;
 
     private String title;
+
     private String anons;
+
+    @Column(columnDefinition = "text")
     private String full_text;
+
     private String author;
+
 
     public Long getId() {
         return id;

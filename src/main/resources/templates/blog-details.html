@@ -2,9 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Блог</title>
+    <title>Blog Details</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/blog-post.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -14,22 +19,22 @@
 <br><br>
 
 <main role="main" class="container">
-    <div th:each="el : ${post}" class="jumbotron">
+    <div th:each="el : ${post}">
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.full_text}" class="lead"></p>
-        The author of the blog is : <h7 th:text="${el.author}"></h7>
+        Published by: <h7 th:text="${el.author}"></h7>
 
         <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-            <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id} + '/edit'" role="button">Редактировать</a> <br><br>
+            <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id} + '/edit'" role="button">Edit</a> <br><br>
 
             <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
-                <button class="btn btn-lg btn-primary" type="submit">Удалить</button>
+                <button class="btn btn-lg btn-primary" type="submit">Remove</button>
             </form>
         </div>
 
     </div>
 </main>
 
-
+<footer th:insert="blocks/footer :: footer"></footer>
 
 </body></html>

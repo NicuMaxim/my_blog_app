@@ -45,20 +45,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/h2-console/**");
+                .antMatchers("/h2-console/**", "/css/**", "/vendor/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/registration**").permitAll()
+                .authorizeRequests().antMatchers("/registration**", "/login**", "/css/**", "/vendor/**").permitAll()
                 .antMatchers("/blog/{id}/remove", "/blog/{id}/edit").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
-                    //.defaultSuccessUrl("/", true)
                     .permitAll()
                 .and()
                     .logout()
@@ -68,5 +67,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login?logout")
                     .permitAll();
     }
-
 }
