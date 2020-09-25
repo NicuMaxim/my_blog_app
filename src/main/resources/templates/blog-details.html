@@ -1,14 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <title>Blog Details</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="css/blog-post.css" rel="stylesheet">
+<head>
+    <title>Blog Post Details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/blog-post.css" rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -16,25 +14,46 @@
 
 <header th:insert="blocks/header :: header"></header>
 
-<br><br>
 
-<main role="main" class="container">
-    <div th:each="el : ${post}">
-        <h3 th:text="${el.title}"></h3>
-        <p th:text="${el.full_text}" class="lead"></p>
-        Published by: <h7 th:text="${el.author}"></h7>
+<div class="container">
 
-        <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-            <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id} + '/edit'" role="button">Edit</a> <br><br>
+        <div class="row">
 
-            <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
-                <button class="btn btn-lg btn-primary" type="submit">Remove</button>
-            </form>
+            <div class="col-lg-8">
+
+                <div th:each="el : ${post}">
+
+                    <h1 class="mt-4" th:text="${el.title}"></h1>
+
+                    <p class="lead" th:text="'Published by: ' + ${el.author}"></p>
+
+                    <hr>
+
+                    <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+
+                    <hr>
+
+                    <p th:text="${el.full_text}"></p>
+
+                    <div class="row" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id} + '/edit'" role="button">Edit</a>
+                        &nbsp &nbsp
+                        <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
+                            <button class="btn btn-lg btn-primary" type="submit">Remove</button>
+                        </form>
+
+                    </div>
+                    <hr>
+            </div>
         </div>
-
     </div>
-</main>
+</div>
 
+<br>
+<br>
 <footer th:insert="blocks/footer :: footer"></footer>
 
-</body></html>
+
+</body>
+
+</html>
