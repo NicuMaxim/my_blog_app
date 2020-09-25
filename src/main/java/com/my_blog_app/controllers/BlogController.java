@@ -1,5 +1,6 @@
 package com.my_blog_app.controllers;
 
+import com.my_blog_app.LongTextToShort;
 import com.my_blog_app.NameByEmail;
 import com.my_blog_app.models.Posts;
 import com.my_blog_app.repository.PostRepository;
@@ -48,6 +49,9 @@ public class BlogController {
     @Autowired
     private NameByEmail nameByEmail;
 
+    @Autowired
+    private LongTextToShort longTextToShort;
+
 
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String title,
@@ -57,7 +61,9 @@ public class BlogController {
 
         String author = nameByEmail.getUserName();
 
-        Posts post = new Posts(title, anons, full_text, author);
+        String short_text = longTextToShort.CreateShortText(full_text);
+
+        Posts post = new Posts(title, anons, full_text, short_text, author);
         postRepository.save(post);
 
         return "redirect:/blog";

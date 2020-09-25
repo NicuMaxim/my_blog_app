@@ -15,8 +15,10 @@ public class Posts {
 
     private String anons;
 
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "NVARCHAR(MAX)")
     private String full_text;
+
+    private String short_text;
 
     private String author;
 
@@ -57,6 +59,10 @@ public class Posts {
         return author;
     }
 
+    public String getShort_text() { return short_text; }
+
+    public void setShort_text(String short_text) { this.short_text = short_text; }
+
     public void setAuthor(String author) {
         this.author = author;
     }
@@ -64,11 +70,12 @@ public class Posts {
     public Posts() {
     }
 
-    public Posts(String title, String anons, String full_text, String author) {
+    public Posts(String title, String anons, String full_text, String short_text, String author) {
 
         this.title = title;
         this.anons = anons;
         this.full_text = full_text;
+        this.short_text = short_text;
         this.author = author;
 
     }

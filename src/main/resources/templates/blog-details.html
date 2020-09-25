@@ -25,7 +25,7 @@
 
                     <h1 class="mt-4" th:text="${el.title}"></h1>
 
-                    <p class="lead" th:text="'Published by: ' + ${el.author}"></p>
+                    <p class="lead" th:text="'Posted by: ' + ${el.author}"></p>
 
                     <hr>
 
@@ -36,10 +36,11 @@
                     <p th:text="${el.full_text}"></p>
 
                     <div class="row" sec:authorize="hasAuthority('ROLE_ADMIN')">
-                        <a class="btn btn-lg btn-primary" th:href="'/blog/' + ${el.id} + '/edit'" role="button">Edit</a>
+                        &nbsp &nbsp
+                        <a class="btn btn-primary" th:href="'/blog/' + ${el.id} + '/edit'" role="button">Edit</a>
                         &nbsp &nbsp
                         <form th:action="'/blog/' + ${el.id} + '/remove'" method="post">
-                            <button class="btn btn-lg btn-primary" type="submit">Remove</button>
+                            <button type="submit" class="btn btn-primary">Remove</button>
                         </form>
 
                     </div>
