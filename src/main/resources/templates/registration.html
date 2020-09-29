@@ -21,24 +21,32 @@
                 <div class="form-group">
                     <label class="control-label" for="firstName"> First Name </label>
                     <input id="firstName" class="form-control" th:field="*{firstName}"
+                           pattern="^[A-Za-z ]{2,20}$"
+                           title="Please, enter a real first name using only Latin letters"
                            required autofocus="autofocus" />
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="lastName"> Last Name </label> <input
                         id="lastName" class="form-control" th:field="*{lastName}"
+                        pattern="^[A-Za-z ]{2,20}$"
+                        title="Please, enter a real last name using only Latin letters"
                         required autofocus="autofocus" />
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="email"> Email </label> <input
-                        id="email" class="form-control" th:field="*{email}" required
-                        autofocus="autofocus" />
+                        id="email" class="form-control" th:field="*{email}"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        title="Please enter a valid email address"
+                        required autofocus="autofocus" />
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="password"> Password </label> <input
                         id="password" class="form-control" type="password"
+                        pattern="^[A-Za-z0-9_]{4,20}$"
+                        title="Password must contain only letters, numbers, and ‘_’. Length should be between 4 and 20 characters."
                         th:field="*{password}" required autofocus="autofocus" />
                 </div>
 

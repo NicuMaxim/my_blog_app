@@ -1,4 +1,4 @@
-package com.my_blog_app;
+package com.my_blog_app.util_classes;
 
 import com.my_blog_app.models.User;
 import com.my_blog_app.repository.UserRepository;
@@ -19,7 +19,6 @@ public class NameByEmail {
 
     @Autowired
     private UserRepository userRepository;
-
 
     public String getUserName() {
 

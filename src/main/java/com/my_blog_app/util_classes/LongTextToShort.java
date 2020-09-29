@@ -1,4 +1,4 @@
-package com.my_blog_app;
+package com.my_blog_app.util_classes;
 
 import org.springframework.stereotype.Component;
 

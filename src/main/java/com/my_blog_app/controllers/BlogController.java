@@ -1,7 +1,7 @@
 package com.my_blog_app.controllers;
 
-import com.my_blog_app.LongTextToShort;
-import com.my_blog_app.NameByEmail;
+import com.my_blog_app.util_classes.LongTextToShort;
+import com.my_blog_app.util_classes.NameByEmail;
 import com.my_blog_app.models.Posts;
 import com.my_blog_app.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;

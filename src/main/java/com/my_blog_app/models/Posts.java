@@ -1,7 +1,4 @@
 package com.my_blog_app.models;
-
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 
 @Entity
