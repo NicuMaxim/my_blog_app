@@ -5,7 +5,7 @@ My pet project is a simple Web-Application with a Blog system
 
 
 
-Which technologies are used?
+## Which technologies are used?
 
 - Spring Boot + Spring MVC + Spring Security
 
@@ -20,7 +20,7 @@ Which technologies are used?
 
 
 
-What it does?
+## What it does?
 
 - You can register and login to the system.
 
@@ -33,7 +33,7 @@ What it does?
 
 
 
-How to run it?
+## How to run it?
 
 - Download project in ZIP archive
 
@@ -48,8 +48,7 @@ How to run it?
 		 Email: admin@gmail.com
 		 Password: Admin_123
 
-- H2 database console can be accessed in your browser:
+- H2 database console can be accessed in your browser at http://localhost:8080/h2-console
 
-     http://localhost:8080/h2-console
-     User Name: sa
-     Password: 1234
+		 User Name: sa
+		 Password: 1234
