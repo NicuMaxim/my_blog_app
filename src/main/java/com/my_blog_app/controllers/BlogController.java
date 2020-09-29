@@ -63,6 +63,8 @@ public class BlogController {
 
         String short_text = longTextToShort.CreateShortText(full_text);
 
+        full_text = full_text.replaceAll("\n","<br />");
+
         Posts post = new Posts(title, anons, full_text, short_text, author);
         postRepository.save(post);
 
@@ -118,7 +120,7 @@ public class BlogController {
 
         postRepository.save(post);
 
-        return "redirect:/blog";
+        return "redirect:/blog/{id}";
     }
 
 

@@ -17,7 +17,7 @@
 
     <div class="starter-template">
         <p class="lead" th:text="'Hello, ' + ${name} + '! Welcome to My Blog App!'"></p>
-        <p class="lead">Check the Blog page to read posts or add a new post by clicking on Add Post</p>
+        <p class="lead">Check the <a th:href="@{/blog}">Blog page</a> to read posts. Also, you can <a th:href="@{/blog/add}">Add a new Post</a></p>
         <p class="lead">Only Admin can Edit and Remove posts</p>
     </div>
 

@@ -4,7 +4,6 @@
 My pet project is a simple Web-Application with a Blog system
 
 
-
 ## Which technologies are used?
 
 - Spring Boot + Spring MVC + Spring Security
@@ -18,8 +17,6 @@ My pet project is a simple Web-Application with a Blog system
 - Bootstrap templates
 
 
-
-
 ## What it does?
 
 - You can register and login to the system.
@@ -29,8 +26,6 @@ My pet project is a simple Web-Application with a Blog system
 - Users can read and add new posts.
 
 - Only Admin can edit or delete posts.
-
-
 
 
 ## How to run it?

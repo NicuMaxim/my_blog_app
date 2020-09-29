@@ -29,11 +29,11 @@
 
                     <hr>
 
-                    <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
+                    <img class="img-fluid rounded" src="/images/template.jpg" alt="">
+<!--                    http://placehold.it/900x300-->
                     <hr>
 
-                    <p th:text="${el.full_text}"></p>
+                    <p th:utext="${el.full_text}" align="justify"></p>
 
                     <div class="row" sec:authorize="hasAuthority('ROLE_ADMIN')">
                         &nbsp &nbsp
