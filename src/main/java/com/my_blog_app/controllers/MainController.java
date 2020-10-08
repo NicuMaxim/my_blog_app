@@ -16,8 +16,8 @@ public class MainController {
 
     @GetMapping("/")
     public String home(Model model) {
-        String user_name = nameByEmail.getUserName();
-        model.addAttribute("name", user_name);
+        String userName = nameByEmail.getUserName();
+        model.addAttribute("name", userName);
         return "home";
     }
 

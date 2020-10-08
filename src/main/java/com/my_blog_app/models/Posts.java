@@ -13,9 +13,9 @@ public class Posts {
     private String anons;
 
     @Column(columnDefinition = "NVARCHAR(MAX)")
-    private String full_text;
+    private String fullText;
 
-    private String short_text;
+    private String shortText;
 
     private String author;
 
@@ -44,21 +44,21 @@ public class Posts {
         this.anons = anons;
     }
 
-    public String getFull_text() {
-        return full_text;
+    public String getFullText() {
+        return fullText;
     }
 
-    public void setFull_text(String full_text) {
-        this.full_text = full_text;
+    public void setFullText(String fullText) {
+        this.fullText = fullText;
     }
 
     public String getAuthor() {
         return author;
     }
 
-    public String getShort_text() { return short_text; }
+    public String getShortText() { return shortText; }
 
-    public void setShort_text(String short_text) { this.short_text = short_text; }
+    public void setShortText(String shortText) { this.shortText = shortText; }
 
     public void setAuthor(String author) {
         this.author = author;
@@ -67,12 +67,12 @@ public class Posts {
     public Posts() {
     }
 
-    public Posts(String title, String anons, String full_text, String short_text, String author) {
+    public Posts(String title, String anons, String fullText, String shortText, String author) {
 
         this.title = title;
         this.anons = anons;
-        this.full_text = full_text;
-        this.short_text = short_text;
+        this.fullText = fullText;
+        this.shortText = shortText;
         this.author = author;
 
     }

@@ -56,16 +56,16 @@ public class BlogController {
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String title,
                               @RequestParam String anons,
-                              @RequestParam String full_text,
+                              @RequestParam String fullText,
                               Model model) {
 
         String author = nameByEmail.getUserName();
 
-        String short_text = longTextToShort.CreateShortText(full_text);
+        String shortText = longTextToShort.CreateShortText(fullText);
 
-        full_text = full_text.replaceAll("\n","<br />");
+        fullText = fullText.replaceAll("\n","<br />");
 
-        Posts post = new Posts(title, anons, full_text, short_text, author);
+        Posts post = new Posts(title, anons, fullText, shortText, author);
         postRepository.save(post);
 
         return "redirect:/blog";
@@ -110,13 +110,13 @@ public class BlogController {
     public String blogPostUpdate (@PathVariable (value = "id") long id,
                                   @RequestParam String title,
                                   @RequestParam String anons,
-                                  @RequestParam String full_text,
+                                  @RequestParam String fullText,
                                   Model model) {
 
         Posts post = postRepository.findById(id).orElseThrow();
         post.setTitle(title);
         post.setAnons(anons);
-        post.setFull_text(full_text);
+        post.setFullText(fullText);
 
         postRepository.save(post);
 

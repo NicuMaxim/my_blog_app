@@ -7,15 +7,15 @@ public class LongTextToShort {
 
     public LongTextToShort() {}
 
-    public String  CreateShortText (String long_text) {
+    public String  CreateShortText (String longText) {
 
-        int max_length = 250;
-        String short_text;
+        int maxLength = 250;
+        String shortText;
 
-        if (long_text.length() >= max_length)
-            short_text = long_text.substring(0, max_length) + "...";
-        else short_text = long_text;
+        if (longText.length() >= maxLength)
+            shortText = String.format("%s...", longText.substring(0, maxLength));
+        else shortText = longText;
 
-        return short_text;
+        return shortText;
     }
 }

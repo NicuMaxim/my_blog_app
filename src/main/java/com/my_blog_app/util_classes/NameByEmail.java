@@ -23,8 +23,8 @@ public class NameByEmail {
     public String getUserName() {
 
 
-        Authentication current_user = SecurityContextHolder.getContext().getAuthentication();
-        String current_email = current_user.getName();
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        String currentEmail = currentUser.getName();
 
         Iterable<User> postsIterator = userRepository.findAll();
 
@@ -35,14 +35,14 @@ public class NameByEmail {
         String lastName = null;
 
         for (User user : users) {
-            if (user.getEmail().equals(current_email)) {
+            if (user.getEmail().equals(currentEmail)) {
 
                 firstName = user.getFirstName();
                 lastName = user.getLastName();
             }
         }
 
-        String author = firstName + " " + lastName;
+        String author = String.format("%s %s", firstName, lastName);
 
         return author;
     }
