@@ -1,7 +1,7 @@
 # my_login_app
 
 
-My pet project is a simple Web-Application with a Blog system
+My pet project is a RESTful web application which is a Blog system
 
 
 ## Which technologies are used?
