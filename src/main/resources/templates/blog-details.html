@@ -29,8 +29,10 @@
 
                     <hr>
 
-                    <img class="img-fluid rounded" src="/images/template.jpg" alt="">
-<!--                    http://placehold.it/900x300-->
+                    <img class="img-fluid rounded" th:src="@{'data:image/jpeg;base64,'+${image}}" alt="image">
+
+<!--                    <img class="img-fluid rounded" src="/images/template.jpg" alt="">
+                        http://placehold.it/900x300-->
                     <hr>
 
                     <p th:utext="${el.fullText}" align="justify"></p>

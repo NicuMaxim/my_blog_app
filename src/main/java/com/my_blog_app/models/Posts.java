@@ -19,6 +19,8 @@ public class Posts {
 
     private String author;
 
+    @Lob
+    private byte[] image;
 
     public Long getId() {
         return id;
@@ -64,16 +66,25 @@ public class Posts {
         this.author = author;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     public Posts() {
     }
 
-    public Posts(String title, String anons, String fullText, String shortText, String author) {
+    public Posts(String title, String anons, String fullText, String shortText, String author, byte[] image) {
 
         this.title = title;
         this.anons = anons;
         this.fullText = fullText;
         this.shortText = shortText;
         this.author = author;
+        this.image = image;
 
     }
 

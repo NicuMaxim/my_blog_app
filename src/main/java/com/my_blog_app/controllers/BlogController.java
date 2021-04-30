@@ -1,5 +1,6 @@
 package com.my_blog_app.controllers;
 
+import com.my_blog_app.service.ImageService;
 import com.my_blog_app.util_classes.LongTextToShort;
 import com.my_blog_app.util_classes.NameByEmail;
 import com.my_blog_app.models.Posts;
@@ -9,12 +10,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.TimeZone;
+import java.io.IOException;
+import java.util.*;
 
 @ComponentScan
 @Controller
@@ -52,20 +52,23 @@ public class BlogController {
     @Autowired
     private LongTextToShort longTextToShort;
 
+    @Autowired
+    private ImageService imageService;
+
 
     @PostMapping("/blog/add")
     public String blogPostAdd(@RequestParam String title,
                               @RequestParam String anons,
                               @RequestParam String fullText,
-                              Model model) {
+                              @RequestParam MultipartFile imageFile,
+                              Model model) throws IOException {
 
         String author = nameByEmail.getUserName();
-
-        String shortText = longTextToShort.CreateShortText(fullText);
-
+        String shortText = longTextToShort.createShortText(fullText);
         fullText = fullText.replaceAll("\n","<br />");
+        byte[] image = imageService.multipartFileToByteArray(imageFile);
 
-        Posts post = new Posts(title, anons, fullText, shortText, author);
+        Posts post = new Posts(title, anons, fullText, shortText, author, image);
         postRepository.save(post);
 
         return "redirect:/blog";
@@ -73,8 +76,8 @@ public class BlogController {
 
 
 
-    @GetMapping("/blog/{id}")
-    public String blogDetails(@PathVariable(value = "id") long id, Model model) {
+    @GetMapping(value="/blog/{id}")
+    public String blogDetails(@PathVariable(value = "id") long id, Model model) throws IOException {
 
         if (!postRepository.existsById(id)) {
             return "redirect:/blog";
@@ -84,7 +87,11 @@ public class BlogController {
         ArrayList<Posts> res = new ArrayList<>();
         post.ifPresent(res::add);
 
+        String  stringImage = imageService.byteArrayImageToString(post.get().getImage());
+
+        model.addAttribute("image", stringImage);
         model.addAttribute("post", res);
+
         return "blog-details";
     }
 
@@ -111,12 +118,19 @@ public class BlogController {
                                   @RequestParam String title,
                                   @RequestParam String anons,
                                   @RequestParam String fullText,
-                                  Model model) {
+                                  @RequestParam MultipartFile imageFile,
+                                  Model model) throws IOException {
 
         Posts post = postRepository.findById(id).orElseThrow();
         post.setTitle(title);
         post.setAnons(anons);
         post.setFullText(fullText);
+        post.setShortText(longTextToShort.createShortText(fullText));
+
+        if (!imageFile.isEmpty()) {
+            byte[] image = imageService.multipartFileToByteArray(imageFile);
+            post.setImage(image);
+        }
 
         postRepository.save(post);
 

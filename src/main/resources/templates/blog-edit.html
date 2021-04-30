@@ -16,11 +16,12 @@
         <div class="col-md-8">
             <h1 class="my-4">Edit Post</h1>
             <div th:each="el : ${post}">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <input type="text" th:value="${el.title}" name="title" placeholder="Enter the Title" class="form-control"><br>
                 <input type="text" th:value="${el.anons}" name="anons" placeholder="Enter the Announcement" class="form-control"><br>
                 <textarea name="fullText" th:text="${el.fullText}" placeholder="Enter the Text" class="form-control" rows="5"></textarea><br>
-                <button type="sumbit" class="btn btn-primary">Update</button>
+                <div style="color: blueviolet"><input type="file" name="imageFile" class="upload"></div><br>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
             </div>
         </div>

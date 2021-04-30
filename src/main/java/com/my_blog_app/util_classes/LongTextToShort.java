@@ -7,7 +7,7 @@ public class LongTextToShort {
 
     public LongTextToShort() {}
 
-    public String  CreateShortText (String longText) {
+    public String createShortText(String longText) {
 
         int maxLength = 250;
         String shortText;
