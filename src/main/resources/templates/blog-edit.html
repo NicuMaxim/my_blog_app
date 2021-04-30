@@ -20,7 +20,24 @@
                 <input type="text" th:value="${el.title}" name="title" placeholder="Enter the Title" class="form-control"><br>
                 <input type="text" th:value="${el.anons}" name="anons" placeholder="Enter the Announcement" class="form-control"><br>
                 <textarea name="fullText" th:text="${el.fullText}" placeholder="Enter the Text" class="form-control" rows="5"></textarea><br>
-                <div style="color: blueviolet"><input type="file" name="imageFile" class="upload"></div><br>
+                <img class="img-fluid rounded" th:src="@{'data:image/jpeg;base64,'+${imageThumbnail}}" alt="image"><br><br>
+                <input type="file" name="imageFile" id="file-selector" class="upload"><br>
+
+
+<!--                <input type="file" id="file-selector" multiple>-->
+                <script>
+                    const fileSelector = document.getElementById('file-selector');
+                    fileSelector.addEventListener('change', (event) => {
+                        const files = event.target.files;
+                        // мы получаем файл, но ещё не разобрался как его показать, лучше всего в том же превью окошке если возможно
+                        console.log(files);
+
+                    });
+                </script>
+
+
+
+
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
             </div>

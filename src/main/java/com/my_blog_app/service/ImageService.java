@@ -1,8 +1,12 @@
 package com.my_blog_app.service;
 
+import org.imgscalr.Scalr;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,5 +43,17 @@ public class ImageService {
 
         return stringImage;
     }
+
+
+    public byte[] createThumbnail (MultipartFile originalImage, Integer width) throws IOException {
+
+        ByteArrayOutputStream thumbOutput = new ByteArrayOutputStream();
+        BufferedImage img = ImageIO.read(originalImage.getInputStream());
+        BufferedImage thumbImg = Scalr.resize(img, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_WIDTH, width, Scalr.OP_ANTIALIAS);
+        ImageIO.write(thumbImg, originalImage.getContentType().split("/") [1], thumbOutput);
+        byte[] byteArrayOutput = thumbOutput.toByteArray();
+        return byteArrayOutput;
+    }
+
 
 }

@@ -67,8 +67,9 @@ public class BlogController {
         String shortText = longTextToShort.createShortText(fullText);
         fullText = fullText.replaceAll("\n","<br />");
         byte[] image = imageService.multipartFileToByteArray(imageFile);
+        byte[] imageThumbnail = imageService.createThumbnail(imageFile, 300);
 
-        Posts post = new Posts(title, anons, fullText, shortText, author, image);
+        Posts post = new Posts(title, anons, fullText, shortText, author, image, imageThumbnail);
         postRepository.save(post);
 
         return "redirect:/blog";
@@ -107,7 +108,10 @@ public class BlogController {
         ArrayList<Posts> res = new ArrayList<>();
         post.ifPresent(res::add);
 
+        String  imageThumbnail = imageService.byteArrayImageToString(post.get().getImageThumbnail());
+
         model.addAttribute("post", res);
+        model.addAttribute("imageThumbnail", imageThumbnail);
         return "blog-edit";
     }
 
@@ -130,6 +134,8 @@ public class BlogController {
         if (!imageFile.isEmpty()) {
             byte[] image = imageService.multipartFileToByteArray(imageFile);
             post.setImage(image);
+            byte[] imageThumbnail = imageService.createThumbnail(imageFile, 300);
+            post.setImageThumbnail(imageThumbnail);
         }
 
         postRepository.save(post);

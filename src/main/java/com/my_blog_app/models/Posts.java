@@ -22,6 +22,10 @@ public class Posts {
     @Lob
     private byte[] image;
 
+    @Lob
+    private byte[] imageThumbnail;
+
+
     public Long getId() {
         return id;
     }
@@ -74,10 +78,19 @@ public class Posts {
         this.image = image;
     }
 
+    public byte[] getImageThumbnail() {
+        return imageThumbnail;
+    }
+
+    public void setImageThumbnail(byte[] imageThumbnail) {
+        this.imageThumbnail = imageThumbnail;
+    }
+
+
     public Posts() {
     }
 
-    public Posts(String title, String anons, String fullText, String shortText, String author, byte[] image) {
+    public Posts(String title, String anons, String fullText, String shortText, String author, byte[] image, byte[] imageThumbnail) {
 
         this.title = title;
         this.anons = anons;
@@ -85,6 +98,7 @@ public class Posts {
         this.shortText = shortText;
         this.author = author;
         this.image = image;
+        this.imageThumbnail = imageThumbnail;
 
     }
 
